@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOOMATCHA - Your Ultimate Matcha Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2E8B57; /* Sea Green */
+            --light-green: #8FBC8F; /* Dark Sea Green */
+            --accent-green: #6B8E23; /* Olive Drab */
+            --text-dark: #333;
+            --text-light: #555;
+            --bg-light: #f4f4f4;
+            --bg-white: #fff;
+            --header-shadow: rgba(0,0,0,0.15);
+            --card-shadow: rgba(0,0,0,0.1);
+            --card-hover-shadow: rgba(0,0,0,0.2);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            line-height: 1.6; /* Improved readability */
+        }
+
+        header {
+            background-color: var(--light-green);
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 3px 8px var(--header-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--bg-white);
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            transition: transform 0.3s ease-in-out;
+            padding: 0 10px; /* Added padding for smaller screens */
+        }
+
+        header h1:hover {
+            transform: scale(1.03) rotate(-2deg);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap; /* Allows navigation items to wrap on smaller screens */
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: var(--bg-white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1em;
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+            display: inline-block;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            color: #e0ffe0;
+        }
+
+        /* Hamburger Menu for Mobile */
+        .menu-toggle {
+            display: none; /* Hidden by default, shown on mobile */
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--bg-white);
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none; /* Hide navigation by default on mobile */
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--light-green);
+                position: absolute;
+                top: 70px; /* Adjust based on header height */
+                left: 0;
+                padding-top: 20px;
+                box-shadow: 0 3px 8px var(--header-shadow);
+            }
+
+            nav ul.active {
+                display: flex; /* Show when active */
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 12px 0;
+                text-align: center;
+                border-radius: 0; /* Remove rounded corners for full width */
+            }
+
+            .menu-toggle {
+                display: flex; /* Show hamburger on mobile */
+            }
+        }
+
+
+        .hero-section {
+            position: relative;
+            height: 60vh; /* Adjust as needed */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--bg-white);
+            background-color: var(--primary-green); /* Fallback */
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            padding: 20px;
+            animation: fadeInScale 1.5s ease-out;
+        }
+
+        .hero-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background-color: var(--accent-green);
+            color: var(--bg-white);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #5a7d1e;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        main {
+            padding: 40px 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+            background-color: var(--bg-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--card-shadow);
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            color: var(--primary-green);
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+            animation: textReveal 1s ease-out forwards;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--light-green);
+            margin: 10px auto 0;
+            border-radius: 5px;
+        }
+
+        @keyframes textReveal {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .image-gallery, .product-grid, .recipe-gallery { /* Changed to product-grid */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .gallery-item, .product-card, .recipe-card {
+            background-color: var(--bg-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover, .product-card:hover, .recipe-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px var(--card-hover-shadow);
+        }
+
+        .gallery-item img, .product-card img, .recipe-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+            transition: transform 0.4s ease-in-out;
+        }
+        .gallery-item:hover img, .product-card:hover img, .recipe-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-content, .product-content, .recipe-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .gallery-content h3, .product-content h3, .recipe-content h3 {
+            color: var(--primary-green);
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .gallery-content p, .product-content p, .recipe-content p {
+            color: var(--text-light);
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        /* Added style for the new "View Recipe" button within recipe cards */
+        .recipe-content .view-recipe-btn {
+            background-color: var(--light-green);
+            color: var(--bg-white);
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 15px; /* Space above the button */
+            align-self: flex-start; /* Align button to the start */
+            text-decoration: none; /* In case it's an anchor */
+            display: inline-block;
+        }
+
+        .recipe-content .view-recipe-btn:hover {
+            background-color: var(--accent-green);
+            transform: translateY(-2px);
+        }
+        .product-content .view-details-btn {
+            background-color: var(--light-green);
+            color: var(--bg-white);
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 15px;
+            align-self: flex-start;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .product-content .view-details-btn:hover {
+            background-color: var(--accent-green);
+            transform: translateY(-2px);
+        }
+
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background-color: #fdfdfd;
+            box-shadow: 0 4px 15px var(--card-shadow);
+        }
+
+        form label {
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--primary-green);
+            font-size: 1.1em;
+        }
+
+        form input, form textarea {
+            padding: 12px;
+            margin: 8px 0 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1em;
+        }
+
+        form input:focus, form textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.2);
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        form button {
+            padding: 12px 25px;
+            background-color: var(--primary-green);
+            color: var(--bg-white);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.15em;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            align-self: center;
+            width: 180px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        form button:hover {
+            background-color: var(--accent-green);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            background-color: #A9A9A9;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid #999;
+            font-size: 0.95em;
+        }
+        
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease;
+        }
+        .popup-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup-content {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+            position: relative;
+            max-height: 90vh; /* Limit height for scrollable content */
+            overflow-y: auto; /* Enable scrolling for long content */
+        }
+        .popup-overlay.active .popup-content {
+            transform: translateY(0);
+        }
+        .popup-content h3 {
+            color: var(--primary-green);
+            font-size: 2em;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        .popup-content p {
+            color: var(--text-light);
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            text-align: left; /* Align text left for better readability */
+            padding: 0 10px; /* Add some padding */
+        }
+        .popup-content p strong {
+            display: block; /* Make strong tags block for better formatting of titles */
+            margin-bottom: 5px;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8em;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .close-popup:hover {
+            color: var(--primary-green);
+        }
+
+        /* Back to top button */
+        #back-to-top {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed/sticky position */
+            bottom: 30px; /* Place the button at the bottom of the page */
+            right: 30px; /* Place the button 30px from the right */
+            z-index: 99; /* Make sure it does not overlap */
+            border: none; /* Remove borders */
+            outline: none; /* Remove outline */
+            background-color: var(--accent-green); /* Set a background color */
+            color: white; /* Text color */
+            cursor: pointer; /* Add a mouse pointer on hover */
+            padding: 15px; /* Some padding */
+            border-radius: 50%; /* Rounded corners */
+            font-size: 1.5em; /* Increase font size */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #back-to-top:hover {
+            background-color: #5a7d1e;
+            transform: translateY(-3px);
+        }
+
+        /* New styles for specific recipe titles */
+        .recipe-card[data-recipe="matcha-cake"] .recipe-content h3,
+        .recipe-card[data-recipe="matcha-cookies"] .recipe-content h3,
+        .recipe-card[data-recipe="matcha-cheesecake"] .recipe-content h3,
+        .recipe-card[data-recipe="matcha-chocolate"] .recipe-content h3,
+        .recipe-card[data-recipe="matcha-tiramisu"] .recipe-content h3,
+        .recipe-card[data-recipe="matcha-pudding"] .recipe-content h3,
+        .recipe-card[data-recipe="matcha-milktea"] .recipe-content h3 {
+            font-size: 1.2em; /* Adjust this value as needed */
+        }
+
+        /* New styles for the "Done" button in popups (Previously for #recipe-popup-overlay .popup-content button.close-popup) */
+        .popup-done-button {
+            background-color: var(--primary-green); /* A strong green */
+            color: white;
+            padding: 12px 30px; /* More padding for a larger button */
+            border: none;
+            border-radius: 30px; /* Fully rounded corners */
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            margin-top: 25px; /* Space above the button */
+            font-weight: 600; /* Bolder text */
+            letter-spacing: 0.5px; /* Slightly spaced letters */
+        }
+
+        .popup-done-button:hover {
+            background-color: var(--accent-green); /* Darker green on hover */
+            transform: translateY(-3px); /* Slight lift effect */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25); /* More pronounced shadow */
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content h2 {
+                font-size: 3em;
+            }
+            h2 {
+                font-size: 2.5em;
+            }
+            .image-gallery, .product-grid, .recipe-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Slightly smaller min-width */
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 20px;
+            }
+            header h1 {
+                font-size: 2em;
+                text-align: left;
+            }
+            .hero-content h2 {
+                font-size: 2.5em;
+            }
+            .hero-content p {
+                font-size: 1.1em;
+            }
+            h2 {
+                font-size: 2em;
+            }
+            main {
+                padding: 20px;
+                margin: 10px auto;
+            }
+            .gallery-item, .product-card, .recipe-card {
+                margin-bottom: 20px;
+            }
+            form {
+                width: 100%;
+                padding: 20px;
+            }
+            .popup-content {
+                max-width: 95%; /* Adjust popup width */
+                padding: 20px;
+            }
+            .popup-content h3 {
+                font-size: 1.8em;
+            }
+            .popup-content p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 15px;
+            }
+            header h1 {
+                font-size: 1.8em;
+            }
+            nav ul li a {
+                font-size: 0.9em;
+                padding: 10px; /* Adjust padding for easier tapping */
+            }
+            .hero-section {
+                height: 40vh;
+            }
+            .hero-content h2 {
+                font-size: 1.8em;
+            }
+            .hero-content p {
+                font-size: 0.9em;
+            }
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .image-gallery, .product-grid, .recipe-gallery {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+            }
+            .gallery-item img, .product-card img, .recipe-card img {
+                height: 180px; /* Slightly smaller image height */
+            }
+            .popup-content {
+                padding: 15px;
+            }
+            .popup-content h3 {
+                font-size: 1.5em;
+            }
+            .popup-content p {
+                font-size: 0.95em;
+            }
+            form input, form textarea, form button {
+                font-size: 0.9em; /* Smaller font for form elements */
+                padding: 10px;
+            }
+            form button {
+                width: 150px;
+            }
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px;
+                font-size: 1.2em;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>YOOMATCHA</h1>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav>
+            <ul id="nav-list">
+                <li><a href="#home"><i class="fas fa-leaf"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="#products"><i class="fas fa-boxes"></i> Our Products</a></li>
+                <li><a href="#recipes"><i class="fas fa-utensils"></i> Matcha Recipes</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero-section" id="home">
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="Cafe Vlog .mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2>Experience the Essence of Matcha with YOOMATCHA</h2>
+            <p>Sourced from the finest leaves, discover a world of vibrant flavor and tranquility.</p>
+            </div>
+    </div>
+
+    <main>
+        <section id="about">
+            <h2>Our Story - The YOOMATCHA Journey</h2>
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="matcha teafields.jpg" alt="Matcha Tea Fields">
+                    <div class="gallery-content">
+                        <h3>From Leaf to Life</h3>
+                        <p>At YOOMATCHA, we are passionate about bringing the highest caliber matcha powders to the UAE and GCC. Our journey begins in the pristine tea gardens, where every leaf is nurtured with care.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="matcha processing.jpeg" alt="Matcha Processing">
+                    <div class="gallery-content">
+                        <h3>Crafted with Precision</h3>
+                        <p>Here in YOOMATCHA we use traditional methods, ensuring that each batch of our matcha powder has its vibrant color, delicate aroma, and rich nutritional profile. </p>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 30px;">Our commitment for YOOMATCHA, is that customers can access premium matcha powder on the market in GCC regions </p>
+        </section>
+
+        <section id="products">
+            <h2>Our Matcha Products - Find Your Perfect Grade</h2>
+            <p style="text-align: center; font-size: 1.1em; color: var(--text-light);">Whether you have a addiction or new to matcha, we have different types of matcha powder that will ease your cravings and elevate your daily ritual.</p>
+            <div class="product-grid">
+                <div class="product-card" data-grade="ceremonial">
+                    <img src="ceremonial matcha.jpg" alt="Ceremonial Matcha">
+                    <div class="product-content">
+                        <h3>Ceremonial Grade Matcha</h3>
+                        <p>It is the perfect matcha powder for a more tradional tea ceremonies.</p>
+                        <button class="view-details-btn" data-target="ceremonial-popup">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-grade="premium-culinary">
+                    <img src="premium matcha.jpg" alt="Premium Culinary Matcha">
+                    <div class="product-content">
+                        <h3>Premium Matcha</h3>
+                        <p>It is has the high-quality type of matcha powder, perfect for daily consumption for you.</p>
+                        <button class="view-details-btn" data-target="premium-culinary-popup">View Details</button>
+                    </div>
+                </div>
+                <div class="product-card" data-grade="culinary">
+                    <img src="culinary matcha.jpeg" alt="Culinary Matcha">
+                    <div class="product-content">
+                        <h3>Culinary Grade Matcha</h3>
+                        <p>It is the idel matcha powder for lattes,smoothies and baking.</p>
+                        <button class="view-details-btn" data-target="culinary-popup">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="recipes">
+            <h2>Delicious Matcha Recipes to Try!</h2>
+            <p style="text-align: center; font-size: 1.1em; color: var(--text-light);">Unleash your inner chef with these incredible matcha-infused creations. Click on a recipe to learn more!</p>
+            <div class="recipe-gallery">
+                <div class="recipe-card" data-recipe="matcha-latte">
+                    <img src="matcha latte.jpg" alt="Matcha Latte">
+                    <div class="recipe-content">
+                        <h3>Matcha Latte</h3>
+                        <p>It gives a creamy and energizing drink, a perfect morning beverage to start your day!.</p>
+                        <button class="view-recipe-btn" data-target="matcha-latte">Click here to see the recipe</button>
+                    </div>
+                </div>
+                <div class="recipe-card" data-recipe="matcha-smoothie">
+                    <img src="matcha smoothie.jpg" alt="Matcha Smoothie">
+                    <div class="recipe-content">
+                        <h3>Matcha Smoothie</h3>
+                        <p>A healthy beverage that gives a refereshing blend of matcha and fruits.</p>
+                        <button class="view-recipe-btn" data-target="matcha-smoothie">Click here to see the recipe</button>
+                    </div>
+                </div>
+                <div class="recipe-card" data-recipe="matcha-cake">
+                    <img src="matcha cake.jpg" alt="Matcha Cake">
+                    <div class="recipe-content">
+                        <h3>Matcha Cake</h3>
+                        <p>A delicious and flavorful matcha taste dessert with a sweet icing on top.</p>
+                        <button class="view-recipe-btn" data-target="matcha-cake">Click here to see the recipe</button>
+                    </div>
+                </div>
+                 <div class="recipe-card" data-recipe="matcha-cookies">
+                    <img src="matcha cookies.jpg" alt="Matcha Cookies">
+                    <div class="recipe-content">
+                        <h3>Matcha Cookies</h3>
+                        <p>Soft and buttery easy to eat dessert with a bitter blend of matcha and sweetness.</p>
+                        <button class="view-recipe-btn" data-target="matcha-cookies">Click here to see the recipe</button>
+                    </div>
+                </div>
+                 <div class="recipe-card" data-recipe="matcha-cheesecake">
+                    <img src="matcha cheesecake.jpg" alt="Matcha Cheesecake">
+                    <div class="recipe-content">
+                        <h3>Matcha Cheesecake</h3>
+                        <p>A blend of creamy and tangy cake, perfect for a sweet and savory dessert for your taste. </p>
+                        <button class="view-recipe-btn" data-target="matcha-cheesecake">Click here to see the recipe</button>
+                    </div>
+                </div>
+                 <div class="recipe-card" data-recipe="matcha-ice-cream">
+                    <img src="matcha ice cream.jpg" alt="Matcha Ice Cream">
+                    <div class="recipe-content">
+                        <h3>Matcha Ice Cream</h3>
+                        <p>A cold and refreshing creamy desseert, that has a mix of bitter and sweetness, perfect in every scoop.</p>
+                        <button class="view-recipe-btn" data-target="matcha-ice-cream">Click here to see the recipe</button>
+                    </div>
+                </div>
+                 <div class="recipe-card" data-recipe="matcha-chocolate">
+                    <img src="matcha chocolate.jpg" alt="Matcha Chocolate">
+                    <div class="recipe-content">
+                        <h3>Matcha Chocolate</h3>
+                        <p>A sweet and rich dessert that has a mix a sweetness and bitterness perfect for a quick bite-sized dessert.</p>
+                        <button class="view-recipe-btn" data-target="matcha-chocolate">Click here to see the recipe</button>
+                    </div>
+                </div>
+                 <div class="recipe-card" data-recipe="matcha-tiramisu">
+                    <img src="matcha tiramisu.jpg" alt="Matcha Tiramisu">
+                    <div class="recipe-content">
+                        <h3>Matcha Tiramisu</h3>
+                        <p>A mix of Japanese and Italian classic desserts, featuring layers of bitter matcha-soaked ladyfingers and creamy mascarpone.</p>
+                        <button class="view-recipe-btn" data-target="matcha-tiramisu">Click here to see the recipe</button>
+                    </div>
+                </div>
+                <div class="recipe-card" data-recipe="matcha-pudding">
+                    <img src="matcha pudding.jpg" alt="Matcha Pudding">
+                    <div class="recipe-content">
+                        <h3>Matcha Pudding</h3>
+                        <p>A smooth and silky pudding, a simple yet elegant dessert with a delightful matcha taste.</p>
+                        <button class="view-recipe-btn" data-target="matcha-pudding">Click here to see the recipe</button>
+                    </div>
+                </div>
+                <div class="recipe-card" data-recipe="matcha-milktea">
+                    <img src="matcha milktea.jpg" alt="Matcha Milktea">
+                    <div class="recipe-content">
+                        <h3>Matcha Milktea</h3>
+                        <p>The most popular drink and refreshing drink with a perfect balance of matcha, milk, and your choice of sweetener and toppings.</p>
+                        <button class="view-recipe-btn" data-target="matcha-milktea">Click here to see the recipe</button>
+                    </div>
+                </div>
+                <div class="recipe-card" data-recipe="matcha-strawberries">
+                    <img src="matcha strawberries.jpg" alt="Matcha Covered Strawberries">
+                    <div class="recipe-content">
+                        <h3>Matcha Covered Strawberries</h3>
+                        <p>Fresh strawberries dipped in a vibrant matcha white chocolate coating – a simple, elegant healthy snack.</p>
+                        <button class="view-recipe-btn" data-target="matcha-strawberries">Click here to see the recipe</button>
+                    </div>
+                </div>
+                <div class="recipe-card" data-recipe="matcha-mochi">
+                    <img src="matcha mochi.jpg" alt="Matcha Mochi">
+                    <div class="recipe-content">
+                        <h3>Matcha Mochi</h3>
+                        <p>A Chewy Japanese rice cakes, often filled with sweet red bean paste with a mix of earthy taste of matcha.</p>
+                        <button class="view-recipe-btn" data-target="matcha-mochi">Click here to see the recipe</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Get in Touch with YooMATCHA</h2>
+            <p style="text-align: center; font-size: 1.1em; color: var(--text-light);">We would love to hear from you! Reach out to us with any questions, feedback, or just to say hello.</p>
+            <form id="contactForm">
+                <label for="name"><i class="fas fa-user"></i> Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Your Name">
+
+                <label for="email"><i class="fas fa-at"></i> Email:</label>
+                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+
+                <label for="subject"><i class="fas fa-heading"></i> Subject:</label>
+                <input type="text" id="subject" name="subject" required placeholder="Regarding your order / General inquiry">
+
+                <label for="message"><i class="fas fa-comment-dots"></i> Message:</label>
+                <textarea id="message" name="message" required placeholder="Type your message here..."></textarea>
+
+                <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 YOOMATCHA. All rights reserved.</p>
+    </footer>
+
+    <div id="product-popup-overlay" class="popup-overlay">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h3 id="popup-title"></h3>
+            <p id="popup-description"></p>
+            <p id="popup-notes"></p>
+            <button class="popup-done-button">Done</button>
+        </div>
+    </div>
+
+    <div id="recipe-popup-overlay" class="popup-overlay">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h3 id="recipe-popup-title"></h3>
+            <p id="recipe-popup-description"></p>
+            <p id="recipe-popup-ingredients"></p>
+            <p id="recipe-popup-instructions"></p>
+            <button class="popup-done-button">Done</button>
+        </div>
+    </div>
+
+    <button onclick="topFunction()" id="back-to-top" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // Hamburger Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navList.classList.toggle('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        navList.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navList.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav ul li a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const headerOffset = document.querySelector('header').offsetHeight; // Account for sticky header
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset - 20; // Add some padding
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+
+                alert(`Thank you, ${name}! We have received your message and will get back to you shortly.\n\nSubject: ${subject}\nEmail: ${email}\nMessage: "${message}"`);
+
+                contactForm.reset();
+            });
+        }
+
+        // Product Details Popups
+        const productDetails = {
+            'ceremonial': {
+                title: 'Ceremonial Matcha',
+                description: 'The best matcha powder for a smooth, sweet and savory dessert or drink',
+                notes: 'It is perfect to drink on its own. Ideal for Usucha (thin tea) and Koicha (thick tea).'
+            },
+            'premium-culinary': {
+                title: 'Premium Matcha',
+                description: 'The premium matcha is perfect for blending. Its strong, vibrant flavor and color stands up beautifully against milk, sweeteners, and other ingredients',
+                notes: 'Excellent for baking, and any recipe where matcha is the main ingredient for the recipe.'
+            },
+            'culinary': {
+                title: 'Culinary Grade Matcha',
+                description: 'A budget friendly option for all your culinary adventure when making matcha desserts or drinks.',
+                notes: 'It is the most recommended type of matcha for baking and cooking.',
+            }
+        };
+
+        const productCards = document.querySelectorAll('.product-card');
+        const productPopupOverlay = document.getElementById('product-popup-overlay');
+        const productPopupTitle = document.getElementById('popup-title');
+        const productPopupDescription = document.getElementById('popup-description');
+        const productPopupNotes = document.getElementById('popup-notes');
+
+        productCards.forEach(card => {
+            card.querySelector('.view-details-btn').addEventListener('click', function() {
+                const grade = this.dataset.target.replace('-popup', '');
+                const details = productDetails[grade];
+
+                productPopupTitle.textContent = details.title;
+                productPopupDescription.textContent = details.description;
+                productPopupNotes.textContent = details.notes;
+                productPopupOverlay.classList.add('active');
+            });
+        });
+
+        // Event listener for the "Done" button in product popup
+        productPopupOverlay.querySelectorAll('.popup-done-button').forEach(button => {
+            button.addEventListener('click', () => {
+                productPopupOverlay.classList.remove('active');
+            });
+        });
+        // Event listener for the 'x' close button in product popup
+        productPopupOverlay.querySelectorAll('.close-popup').forEach(button => {
+            button.addEventListener('click', () => {
+                productPopupOverlay.classList.remove('active');
+            });
+        });
+
+
+        // Recipe Details Popups
+        const recipeDetails = {
+            'matcha-latte': {
+                title: 'Classic Matcha Latte',
+                description: 'A creamy and comforing drink in a glass that has combination of milk and matcha.',
+                ingredients: '<strong>Ingredients:</strong><br>- 2 tsp YOOMATCHA Culinary Grade Matcha<br>- 1 to 2 tbsp of hot water<br>- 1/2 cup unsweetened milk <br>- 1/2 cup ice cubes<br>-Honey or maple syrup to taste',
+                instructions: '<strong>Instructions:</strong><br>1.In a bowl, add the matcha powder and the 1 to 2 tbsp of hot water then whisk it until the it has been incorporated all together.<br> 2. Add milk and ice cube to the glass.<br>3. Pour the matcha into the glass.<br>4. Add sweetener of your choice.'
+                
+            },
+            'matcha-smoothie': {
+                title: 'Banana Matcha Smoothie',
+                description: 'A healthy and refreshing boost drink to start your day.Perfect for a quick healthy breakfast',
+                ingredients: '<strong>Ingredients:</strong><br>-1 tsp YOOMATCHA Culinary Grade Matcha<br>-1 ripe banana (frozen for creaminess)<br>-1/2 cup spinach (optional)<br>-1/2 cup unsweetened almond milk (or other milk)<br>- 1/2 cup ice cubes<br>- 1 tbsp chia seeds (optional)<br>- Honey or maple syrup to taste.<br>- 1/2 tsp vanilla extract',
+                instructions: '<strong>Instructions:</strong><br>1. Combine and put all the ingredients in a blender.<br>2. Blend until the texture is smooth and creamy.<br>3. Pour into glass and put your desired topping on top.'
+            },
+            'matcha-cake': {
+                title: 'Matcha Cake',
+                description: 'A soft and fluffy type of cake mixed with a unique taste of matcha and sweetness',
+                ingredients: '<strong>Ingredients:</strong><br>- 7 tablespoon of unsalted butter, softened<br>- 1 tbsp YOOMATCHA Culinary Matcha<br>- 1 cup granulated sugar<br>- 2 large eggs<br>- 1 cup of all purpose flour <br>- 1 tsp baking poweder<br>- 2 cups of powdered sugar, sifted<br>- 1 tsp vanilla extract<br>- 2 tbsp of heavy cream',
+                instructions: '<strong>Instructions:</strong><br>1. Preheat oven to 325°F.<br>2. In a mediulm-sized bowl, mix the softened butter and sugar until light and fluffy. Next add the eggs, matcha powder and vanilla extract.<br>3.In a seperate bowl, add the flour and baking powder.Then add the buttermilk.Pour the batter in and put in in the oven.Combine the frosting ingredients.Then spread the frosting onto the cake.'
+            },
+            'matcha-cookies': {
+                title: 'Matcha White Chocolate Cookies',
+                description: 'Chewy and savory dessert that offers a distintive taste of sweetness and bitterness.',
+                ingredients: '<strong>Ingredients:</strong><br>- 3/4 cup room temperature unsalted butter<br>- 1/2 cup light brown sugar<br>- 1/4 cup packed light brown sugar<br>- 1 tbsp cornstarch<br>- 1 tsp vanilla extract<br>- 1 3/4 cups all-purpose flour<br>- 2 tbsp YOOMATCHA Culinary Grade Matcha<br>- 1 tsp baking soda<br>- 1/2 tsp salt<br>- 1 cup white chocolate chips',
+                instructions: '<strong>Instructions:</strong><br>1. Preheat oven to 325°F<br>2.In a small bowl, combine the dry ingredients.Put the butter and brown sugar.Then add the egg and vanilla extract.Add the dry ingredients to the wet batter and mix it well.Put the white chocolate on the dough.Scoop out the dough and put it in the pan.Pop it in the oven to bake for about 11 to 12 minutes.'
+            },
+            'matcha-cheesecake': {
+                title: ' Matcha No-Bake Cheesecake',
+                description: 'Creamy and Rich dessert that give a sophisticated intriguig flavor of matcha and white chocolate.',
+                ingredients: '<strong>Ingredients:</strong><br>- For Base: 1 1/4 cups of Oreo cookies or graham crackers, 45 g of unsalted butter (melted)<br>- For Filling: , 500 g of cream cheese, 1 1/2 tsp vanilla extract, 1 1/3 cup of powdered icing sugar, 3 tbsp of YOOMATCHA Culinary Grade Matcha, 1 cup heavy cream',
+                instructions: '<strong>Instructions:</strong><br>1. Place the oreo or graham crackers in a food processor and blend it until you get fine crumbs. Put the butter in the microwave then pour it into the crushed cookie.<br>3.In a bowl, mix the cream cheese, vanilla extract, then add the icing sugar and matcha powder. Mix until combined all together.<br>4. Fold the whipped cream into the cream cheeese mix until it is smooth.Pour the filling evenly in the pan, then cover it with a cling film and refrigerate it for atleast 3hrs or overnight until set. Dust some matcha powder on top when serving.'
+            },
+            'matcha-ice-cream': {
+                title: 'Matcha Ice Cream',
+                description: 'Refreshing, Creamy and cool dessert that catches the essence of matcha in each scoop.',
+                ingredients: '<strong>Ingredients:</strong><br>- 2 cups heavy cream<br>- 1 cup whole milk<br>- 1/2 cup granulated sugar<br> 2 tbsp maple syrup<br>- 2 tbsp YOOMATCHA Culinary Matcha<br>- squeeze of lemon (optional)',
+                instructions: '<strong>Instructions:</strong><br>1. If you are using an ice cream maker, make sure that it has been in the freezer for atleast 12 to 24 hours.<br>2.Combine the matcha powder,sugar, maple syrup, vanilla, lemon (optional) and salt. Then pour it in the ice cream maker and churn it according to the directions<br>3. Pour into a freezer-safe container and freeze it for atleast 1-2 hours to make it firm<br>4.Once your ice cream is frozen, put it in the bowl and Enjoy!.'
+            },
+            'matcha-chocolate': {
+                title: 'Matcha Chocolate',
+                description: 'An easy-to-make, sweet treat combining the sweetness of white chocolate with matcha.',
+                ingredients: '<strong>Ingredients:</strong><br>- 14 oz white chocolate, chopped<br>- 4 tbsp YOOMATCHA Culinary Grade Matcha<br>- 1/2 cup heavy whipping cream<br>-2 tbsp of unsalted butter',
+                instructions: '<strong>Instructions:</strong><br>1. Chop the white chocolate into small pieces.Then cut the unsalted butter<br>2.Add 1/2 cup heavy whipping cream into a small saucepan and bring it to a boil over medium heat.<br>3. Pour the white chocolate and butter to the whipping cream, then mix it all together<br>4. Once the mixture is smooth, put matcha into the mixture and stir until fully combined. Pour matcha chocolate batter onto the lined baking sheet and spread evenly.<br>6.Chill until firm .Remove the chocolate and cut into bite size then dust matcha on top.'
+            },
+             'matcha-tiramisu': {
+                title: 'Matcha Tiramisu',
+                description: 'A delightful fusion mix of Italian dessert and Japanese matcha, perfect for special occasions.',
+                ingredients: '<strong>Ingredients:</strong><br>- 3 large egg yolks<br>- 2 tbsp YOOMATCHA Culinary Grade Matcha<br>- 225 g  mascarpone cheese, room temperature<br>- 70 g  granulated sugar<br>- 1 tsp vanilla extract<br>- 350 g heavy cream, cold<br>- 24-30 pieces of ladyfingers<br>- 120 g hot water',
+                instructions: '<strong>Instructions:</strong><br>1. Boil 1 liter of water. In a large bowl, whisk egg yolks and sugar over the boiling water until sugar dissolves.<br>2. In a separate bowl, whisk heavy cream, matcha, and vanilla until fluffy. Gently fold into the mascarpone.<br>3. Combine 1 tbsp matcha, 1 tbsp sugar, and hot water in a shallow bowl. Quickly dip ladyfingers in this mixture. Layer soaked ladyfingers and mascarpone cream in a serving dish.Chill for at least 4 hours or overnight. Dust with matcha powder before serving.'
+        
+            },
+            'matcha-pudding': {
+                title: 'Creamy Matcha Pudding',
+                description: 'Light, Silky smooth desserts that gives a jiggly experince for the customers.',
+                ingredients: '<strong>Ingredients:</strong><br>- 150 ml milk<br>- 1/2 cup granulated sugar<br>- 4 g gelatine powder<br>- 1 tbsp YOOMATCHA Culinary Grade Matcha<br>- 2 tbsp water<br>-120 g heavy cream<br>- Boiled azuki bean paste(optional)<br>- Mint leaves for garnish (optional)',
+                instructions: '<strong>Instructions:</strong><br>1.Pour the gelatine powder in the bowl of water. Mix until the powder is melted and microwave it for 15-20 seconds<br>2. Put the sugar in a jar, then put the matcha powder.<br>3.Add the gelatine liquid to the jar, then add the remaining milk and cream and mix.<br>4.Gently pour the matcha mixture into the serving glass. Put the glass into the fridge for 3 hours.Then pour the mixture into individual serving dishes.Chill for at least 2 hours before serving.'
+            },
+            'matcha-milktea': {
+                title: 'Iced Matcha Boba Milk Tea',
+                description: 'A popular and refreshing drink combining matcha, milk, and chewy boba pearls.',
+                ingredients: '<strong>Ingredients:</strong><br>- 2 tbsp YOOMATCHA Culinary Grade Matcha<br>- 2 oz hot water<br>- 1 1/2 cup milk<br>- 2 tsp maple syrup<br>- Cooked boba pearls (tapioca pearls)<br>- 2 cups Ice cubes<br>- 160 ml cold water',
+                instructions: '<strong>Instructions:</strong><br>1.In a cocktail shaker, pour cold water, matcha powder and maple syrup. Shake it for 10-15 seconds until combined.<br>2. Cook the tapioca pearls according to the directions.After cooking, drain the pearls and add the maple syrup.<br>3. In a serving glass, add cooked boba pearls. Add ice cubes.<br>4. Pour in milk and sweetener.<br>5.Stir well before drinking and enjoy!'
+            },
+            'matcha-strawberries': {
+                title: 'Matcha Covered Strawberries',
+                description: 'A simple yet elegant treat, fresh juicy strawberries coated in delicious matcha white chocolate.',
+                ingredients: '<strong>Ingredients:</strong><br>- 1 lb fresh strawberries, washed and dried<br>- 300 g white chocolate, chopped<br>- 1 tsp YOOMATCHA Culinary Matcha',
+                instructions: '<strong>Instructions:</strong><br>1. Line a baking sheet with parchment paper.<br>2. Melt the white chocolate using a double boiler or microwave.<br>3. Sift matcha into the melted white chocolate and stir until fully combined <br>4. Dip each strawberry into the matcha chocolate, allowing excess to drip off. Place on the prepared baking sheet.<br>5. Chill for 15-30 minutes, or until the chocolate coating is set.'
+            },
+            'matcha-mochi': {
+                title: 'Matcha Mochi',
+                description: 'Soft and chewy Japanese dessert with a hint of delicate matcha flavor.',
+                ingredients: '<strong>Ingredients:</strong><br>- 1 cup glutinous rice flour <br>- 1 cup granulated sugar<br>- 1 1/2 tsp YOOMATCHA Culinary Grade Matcha<br>- 1 cup water<br>- Potato starch or cornstarch (for dusting)<br>-3/4 cup coconut milk<br>-3/4 tsp vanilla extract',
+                instructions: '<strong>Instructions:</strong><br>1.Preheat the oven to 275°F<br>2.Grease an square glass pan.In a medium bowl, whisk together the glutinous rice flour,sugar,coconut milk and vanila extract. After that pour the wet ingredients into the dry ingredients and whisk until smooth.<br>3.Pour the batter into the pan, cover tightly with foil, and bake it for 60 to 80 minutes.Remove the foil, let it cool and then re-cover it agin with foil.Remove the mochi into a cutting board and cut it into small cubes. Coat it with cornstarch.',
+            }
+        };
+
+        const recipeCards = document.querySelectorAll('.recipe-card');
+        const recipePopupOverlay = document.getElementById('recipe-popup-overlay');
+        const recipePopupTitle = document.getElementById('recipe-popup-title');
+        const recipePopupDescription = document.getElementById('recipe-popup-description');
+        const recipePopupIngredients = document.getElementById('recipe-popup-ingredients');
+        const recipePopupInstructions = document.getElementById('recipe-popup-instructions');
+
+        recipeCards.forEach(card => {
+            // Modify this event listener to target the button specifically
+            card.querySelector('.view-recipe-btn').addEventListener('click', function(event) {
+                event.stopPropagation(); // Prevent the card's general click event from firing
+                const recipeId = this.dataset.target; // Use data-target for the recipe ID
+                const details = recipeDetails[recipeId];
+
+                if (details) {
+                    recipePopupTitle.textContent = details.title;
+                    recipePopupDescription.textContent = details.description;
+                    recipePopupIngredients.innerHTML = details.ingredients; // Use innerHTML for bolding
+                    recipePopupInstructions.innerHTML = details.instructions; // Use innerHTML for bolding
+                    recipePopupOverlay.classList.add('active');
+                }
+            });
+        });
+
+        // Event listener for the "Done" button in recipe popup
+        recipePopupOverlay.querySelectorAll('.popup-done-button').forEach(button => {
+            button.addEventListener('click', () => {
+                recipePopupOverlay.classList.remove('active');
+            });
+        });
+        // Event listener for the 'x' close button in recipe popup
+        recipePopupOverlay.querySelectorAll('.close-popup').forEach(button => {
+            button.addEventListener('click', () => {
+                recipePopupOverlay.classList.remove('active');
+            });
+        });
+
+        // Back to top button functionality
+        let mybutton = document.getElementById("back-to-top");
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
