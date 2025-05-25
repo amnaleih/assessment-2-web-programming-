@@ -1,0 +1,665 @@
+:root {
+    --primary-green: #2E8B57; /* Sea Green */
+    --light-green: #8FBC8F; /* Dark Sea Green */
+    --accent-green: #6B8E23; /* Olive Drab */
+    --text-dark: #333;
+    --text-light: #555;
+    --bg-light: #f4f4f4;
+    --bg-white: #fff;
+    --header-shadow: rgba(0,0,0,0.15);
+    --card-shadow: rgba(0,0,0,0.1);
+    --card-hover-shadow: rgba(0,0,0,0.2);
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    scroll-behavior: smooth;
+    line-height: 1.6; /* Improved readability */
+}
+
+header {
+    background-color: var(--light-green);
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 3px 8px var(--header-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    color: var(--bg-white);
+    font-family: 'Playfair Display', serif;
+    font-size: 3em;
+    transition: transform 0.3s ease-in-out;
+    padding: 0 10px; /* Added padding for smaller screens */
+}
+
+header h1:hover {
+    transform: scale(1.03) rotate(-2deg);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    flex-wrap: wrap; /* Allows navigation items to wrap on smaller screens */
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: var(--bg-white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1em;
+    padding: 8px 15px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    color: #e0ffe0;
+}
+
+/* Hamburger Menu for Mobile */
+.menu-toggle {
+    display: none; /* Hidden by default, shown on mobile */
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 1001;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--bg-white);
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        display: none; /* Hide navigation by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--light-green);
+        position: absolute;
+        top: 70px; /* Adjust based on header height */
+        left: 0;
+        padding-top: 20px;
+        box-shadow: 0 3px 8px var(--header-shadow);
+    }
+
+    nav ul.active {
+        display: flex; /* Show when active */
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 12px 0;
+        text-align: center;
+        border-radius: 0; /* Remove rounded corners for full width */
+    }
+
+    .menu-toggle {
+        display: flex; /* Show hamburger on mobile */
+    }
+}
+
+
+.hero-section {
+    position: relative;
+    height: 60vh; /* Adjust as needed */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--bg-white);
+    background-color: var(--primary-green); /* Fallback */
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    padding: 20px;
+    animation: fadeInScale 1.5s ease-out;
+}
+
+.hero-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.cta-button {
+    background-color: var(--accent-green);
+    color: var(--bg-white);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cta-button:hover {
+    background-color: #5a7d1e;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+main {
+    padding: 40px 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    background-color: var(--bg-white);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--card-shadow);
+}
+
+section {
+    margin-bottom: 60px;
+}
+
+h2 {
+    color: var(--primary-green);
+    text-align: center;
+    font-size: 2.8em;
+    margin-bottom: 30px;
+    font-family: 'Playfair Display', serif;
+    animation: textReveal 1s ease-out forwards;
+    position: relative;
+    padding-bottom: 10px;
+}
+h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--light-green);
+    margin: 10px auto 0;
+    border-radius: 5px;
+}
+
+@keyframes textReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.image-gallery, .product-grid, .recipe-gallery { /* Changed to product-grid */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.gallery-item, .product-card, .recipe-card {
+    background-color: var(--bg-white);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.gallery-item:hover, .product-card:hover, .recipe-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px var(--card-hover-shadow);
+}
+
+.gallery-item img, .product-card img, .recipe-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+    transition: transform 0.4s ease-in-out;
+}
+.gallery-item:hover img, .product-card:hover img, .recipe-card:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-content, .product-content, .recipe-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gallery-content h3, .product-content h3, .recipe-content h3 {
+    color: var(--primary-green);
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+}
+
+.gallery-content p, .product-content p, .recipe-content p {
+    color: var(--text-light);
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+/* Added style for the new "View Recipe" button within recipe cards */
+.recipe-content .view-recipe-btn {
+    background-color: var(--light-green);
+    color: var(--bg-white);
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 15px; /* Space above the button */
+    align-self: flex-start; /* Align button to the start */
+    text-decoration: none; /* In case it's an anchor */
+    display: inline-block;
+}
+
+.recipe-content .view-recipe-btn:hover {
+    background-color: var(--accent-green);
+    transform: translateY(-2px);
+}
+.product-content .view-details-btn {
+    background-color: var(--light-green);
+    color: var(--bg-white);
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 15px;
+    align-self: flex-start;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.product-content .view-details-btn:hover {
+    background-color: var(--accent-green);
+    transform: translateY(-2px);
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    box-shadow: 0 4px 15px var(--card-shadow);
+}
+
+form label {
+    margin-top: 15px;
+    font-weight: 600;
+    color: var(--primary-green);
+    font-size: 1.1em;
+}
+
+form input, form textarea {
+    padding: 12px;
+    margin: 8px 0 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+}
+
+form input:focus, form textarea:focus {
+    outline: none;
+    border-color: var(--accent-green);
+    box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.2);
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+form button {
+    padding: 12px 25px;
+    background-color: var(--primary-green);
+    color: var(--bg-white);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.15em;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    align-self: center;
+    width: 180px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+form button:hover {
+    background-color: var(--accent-green);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+footer {
+    background-color: #A9A9A9;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    border-top: 1px solid #999;
+    font-size: 0.95em;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease;
+}
+.popup-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-content {
+    background: var(--bg-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+    position: relative;
+    max-height: 90vh; /* Limit height for scrollable content */
+    overflow-y: auto; /* Enable scrolling for long content */
+}
+.popup-overlay.active .popup-content {
+    transform: translateY(0);
+}
+.popup-content h3 {
+    color: var(--primary-green);
+    font-size: 2em;
+    margin-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+}
+.popup-content p {
+    color: var(--text-light);
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    text-align: left; /* Align text left for better readability */
+    padding: 0 10px; /* Add some padding */
+}
+.popup-content p strong {
+    display: block; /* Make strong tags block for better formatting of titles */
+    margin-bottom: 5px;
+}
+
+.close-popup {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.8em;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.close-popup:hover {
+    color: var(--primary-green);
+}
+
+/* Back to top button */
+#back-to-top {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 30px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: var(--accent-green); /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 50%; /* Rounded corners */
+    font-size: 1.5em; /* Increase font size */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#back-to-top:hover {
+    background-color: #5a7d1e;
+    transform: translateY(-3px);
+}
+
+/* New styles for specific recipe titles */
+.recipe-card[data-recipe="matcha-cake"] .recipe-content h3,
+.recipe-card[data-recipe="matcha-cookies"] .recipe-content h3,
+.recipe-card[data-recipe="matcha-cheesecake"] .recipe-content h3,
+.recipe-card[data-recipe="matcha-chocolate"] .recipe-content h3,
+.recipe-card[data-recipe="matcha-tiramisu"] .recipe-content h3,
+.recipe-card[data-recipe="matcha-pudding"] .recipe-content h3,
+.recipe-card[data-recipe="matcha-milktea"] .recipe-content h3 {
+    font-size: 1.2em; /* Adjust this value as needed */
+}
+
+/* New styles for the "Done" button in popups (Previously for #recipe-popup-overlay .popup-content button.close-popup) */
+.popup-done-button {
+    background-color: var(--primary-green); /* A strong green */
+    color: white;
+    padding: 12px 30px; /* More padding for a larger button */
+    border: none;
+    border-radius: 30px; /* Fully rounded corners */
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 25px; /* Space above the button */
+    font-weight: 600; /* Bolder text */
+    letter-spacing: 0.5px; /* Slightly spaced letters */
+}
+
+.popup-done-button:hover {
+    background-color: var(--accent-green); /* Darker green on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25); /* More pronounced shadow */
+}
+
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-content h2 {
+        font-size: 3em;
+    }
+    h2 {
+        font-size: 2.5em;
+    }
+    .image-gallery, .product-grid, .recipe-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Slightly smaller min-width */
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+    }
+    header h1 {
+        font-size: 2em;
+        text-align: left;
+    }
+    .hero-content h2 {
+        font-size: 2.5em;
+    }
+    .hero-content p {
+        font-size: 1.1em;
+    }
+    h2 {
+        font-size: 2em;
+    }
+    main {
+        padding: 20px;
+        margin: 10px auto;
+    }
+    .gallery-item, .product-card, .recipe-card {
+        margin-bottom: 20px;
+    }
+    form {
+        width: 100%;
+        padding: 20px;
+    }
+    .popup-content {
+        max-width: 95%; /* Adjust popup width */
+        padding: 20px;
+    }
+    .popup-content h3 {
+        font-size: 1.8em;
+    }
+    .popup-content p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 10px 15px;
+    }
+    header h1 {
+        font-size: 1.8em;
+    }
+    nav ul li a {
+        font-size: 0.9em;
+        padding: 10px; /* Adjust padding for easier tapping */
+    }
+    .hero-section {
+        height: 40vh;
+    }
+    .hero-content h2 {
+        font-size: 1.8em;
+    }
+    .hero-content p {
+        font-size: 0.9em;
+    }
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    h2 {
+        font-size: 1.8em;
+    }
+    .image-gallery, .product-grid, .recipe-gallery {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+    }
+    .gallery-item img, .product-card img, .recipe-card img {
+        height: 180px; /* Slightly smaller image height */
+    }
+    .popup-content {
+        padding: 15px;
+    }
+    .popup-content h3 {
+        font-size: 1.5em;
+    }
+    .popup-content p {
+        font-size: 0.95em;
+    }
+    form input, form textarea, form button {
+        font-size: 0.9em; /* Smaller font for form elements */
+        padding: 10px;
+    }
+    form button {
+        width: 150px;
+    }
+    #back-to-top {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px;
+        font-size: 1.2em;
+    }
+}
+
+/* Animations */
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
